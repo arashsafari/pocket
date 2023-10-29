@@ -12,6 +12,7 @@ use App\Http\Resources\CurrencyResource;
 use Illuminate\Http\Response;
 use Symfony\Component\HttpFoundation\Exception\BadRequestException;
 use App\Contracts\Interfaces\Controllers\Api\V1\CurrencyControllerInterface;
+use Illuminate\Http\Request;
 
 class CurrencyController extends Controller implements CurrencyControllerInterface
 {
@@ -51,7 +52,7 @@ class CurrencyController extends Controller implements CurrencyControllerInterfa
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateCurrencyRequest $request, Currency $currency)
+    public function update(Request $request, Currency $currency)
     {
         //
     }

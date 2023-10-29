@@ -3,8 +3,8 @@
 namespace App\Contracts\Interfaces\Controllers\Api\V1;
 
 use App\Http\Requests\StoreCurrencyRequest;
-use App\Http\Requests\UpdateCurrencyRequest;
 use App\Models\Currency;
+use Illuminate\Http\Request;
 
 interface CurrencyControllerInterface
 {
@@ -104,7 +104,7 @@ interface CurrencyControllerInterface
      */
     public function store(StoreCurrencyRequest $request);
 
-    public function update(UpdateCurrencyRequest $request, Currency $currency);
+    public function update(Request $request, Currency $currency);
 
     public function destroy(Currency $currency);
 
