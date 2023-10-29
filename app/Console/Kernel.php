@@ -14,9 +14,9 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule): void
     {
         // $schedule->command('inspire')->hourly();
-        $schedule->command('payment:delete-list',[
+        $schedule->command('payment:delete-list', [
             'status' => PaymentStatusEnums::PENDING->value
-        ])->everyMinute();
+        ])->dailyAt('00:00');
     }
 
     /**
