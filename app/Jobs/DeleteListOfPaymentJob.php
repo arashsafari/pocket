@@ -2,7 +2,6 @@
 
 namespace App\Jobs;
 
-use App\Mail\RejectPaymentMail;
 use App\Models\Payment;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
@@ -10,18 +9,17 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Facades\Mail;
 
-class RejectPaymentJob implements ShouldQueue
+class DeleteListOfPaymentJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     /**
      * Create a new job instance.
      */
-    public function __construct(public Payment $payment)
+    public function __construct(private array $paymentIdList)
     {
-        $this->onQueue('emails');
+        $this->onQueue('delete-payment');
     }
 
     /**
@@ -29,7 +27,7 @@ class RejectPaymentJob implements ShouldQueue
      *
      * @var int
      */
-    public $tries = 10;
+    public $tries = 3;
 
     /**
      * The maximum number of unhandled exceptions to allow before failing.
@@ -52,11 +50,12 @@ class RejectPaymentJob implements ShouldQueue
      */
     public $failOnTimeout = true;
 
+
     /**
      * Execute the job.
      */
     public function handle(): void
     {
-        Mail::to($this->payment->user->email)->send(new RejectPaymentMail($this->payment));
+        Payment::query()->whereIn('id', $this->paymentIdList)->delete();
     }
 }
