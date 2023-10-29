@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Jobs\DeleteListOfPaymentJob;
 use App\Models\Payment;
+use Carbon\Carbon;
 use Illuminate\Console\Command;
 
 class DeleteListOfPaymentCommand extends Command
@@ -27,8 +28,12 @@ class DeleteListOfPaymentCommand extends Command
      */
     public function handle()
     {
-        Payment::where('status', $this->argument('status'))->chunk(config('settings.payment.delete_list_of_payment_number'), function ($payments) {
-            DeleteListOfPaymentJob::dispatch($payments->pluck('id')->toArray());
-        });
+        Payment::where([
+            ['status', $this->argument('status')],
+            ['created_at', '<', Carbon::now()->subHours(config('settings.payment.delete_payment_after_hours'))]
+        ])
+            ->chunk(config('settings.payment.delete_list_of_payment_number'), function ($payments) {
+                DeleteListOfPaymentJob::dispatch($payments->pluck('id')->toArray());
+            });
     }
 }
