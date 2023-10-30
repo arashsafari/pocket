@@ -39,13 +39,6 @@ class AuthController extends Controller
             ->send();
     }
 
-    public function logout()
-    {
-        auth()->logout();
-        return ApiResponse::message(__('payment.messages.user_successfuly_logout'))
-            ->send();
-    }
-
     public function refresh()
     {
         $data = [
@@ -60,6 +53,13 @@ class AuthController extends Controller
     {
         return ApiResponse::message(__('user.messages.user_info'))
             ->data(new UserResource(auth()->user()))
+            ->send();
+    }
+
+    public function logout()
+    {
+        auth()->logout();
+        return ApiResponse::message(__('payment.messages.user_successfuly_logout'))
             ->send();
     }
 }
