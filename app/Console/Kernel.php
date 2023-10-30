@@ -13,10 +13,11 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        // $schedule->command('inspire')->hourly();
         $schedule->command('payment:delete-list', [
             'status' => PaymentStatusEnums::PENDING->value
         ])->dailyAt('00:00');
+
+        $schedule->command('rate:save-currency-rate')->dailyAt('12:00');
     }
 
     /**

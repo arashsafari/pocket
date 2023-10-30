@@ -12,6 +12,35 @@ class CurrencySeeder extends Seeder
      */
     public function run(): void
     {
-        Currency::factory()->count(3)->create();
+        $currencies = [
+            [
+                'key' => 'dollar',
+                'name' => 'Dollar',
+                'symbol' => '$',
+                'iso_code' => 'usd',
+            ],
+            [
+                'key' => 'yuan',
+                'name' => 'Yuan',
+                'symbol' => '¥',
+                'iso_code' => 'cny',
+            ],
+            [
+                'key' => 'pound',
+                'name' => 'Pound',
+                'symbol' => '£',
+                'iso_code' => 'gbp',
+            ],
+            [
+                'key' => 'rial',
+                'name' => 'Rial',
+                'symbol' => '﷼',
+                'iso_code' => 'irr',
+            ],
+        ];
+
+        foreach ($currencies as $currency) {
+            Currency::create($currency);
+        }
     }
 }
