@@ -98,4 +98,9 @@ class User extends Authenticatable implements JWTSubject
             'balance' => $balances->toJson()
         ]);
     }
+
+    public function approvals()
+    {
+        return $this->hasMany(Approval::class);
+    }
 }

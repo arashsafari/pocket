@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Enums\Payment\PaymentStatusEnums;
-use App\Events\ApprovedPaymentEvent;
-use App\Events\RejectedPaymentEvent;
+use App\Events\PaymentApprovedEvent;
+use App\Events\PaymentRejectedEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StorePaymentRequest;
 use App\Http\Resources\PaymentCollection;
@@ -105,7 +105,7 @@ class PaymentController extends Controller implements PaymentControllerInterface
             'status' => PaymentStatusEnums::REJECTED
         ]);
 
-        RejectedPaymentEvent::dispatch($payment);
+        PaymentRejectedEvent::dispatch($payment);
 
         return ApiResponse::message(__('payment.messages.the_payment_was_successfully_rejected'))
             ->data(new PaymentResource($payment))
@@ -142,7 +142,7 @@ class PaymentController extends Controller implements PaymentControllerInterface
             'status_updated_by' => auth()->user()->id
         ]);
 
-        ApprovedPaymentEvent::dispatch($payment);
+        PaymentApprovedEvent::dispatch($payment);
 
         return ApiResponse::message(__('payment.messages.the_payment_was_successfully_approved'))
             ->data(new PaymentResource($payment))

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Listeners\ApprovedPaymentEvent;
+namespace App\Listeners\PaymentApprovedEvent;
 
-use App\Events\ApprovedPaymentEvent;
+use App\Events\PaymentApprovedEvent;
 use App\Mail\ApprovedPaymentMail;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\Mail;
@@ -20,7 +20,7 @@ class ApprovedPaymentEmailListener implements ShouldQueue
     /**
      * Handle the event.
      */
-    public function handle(ApprovedPaymentEvent $event): void
+    public function handle(PaymentApprovedEvent $event): void
     {
         Mail::to($event->payment->user->email)->send(new ApprovedPaymentMail($event->payment));
 
