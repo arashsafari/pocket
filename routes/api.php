@@ -28,7 +28,7 @@ if (!auth()->check()) {
 }
 
 Route::prefix('v1')->middleware('throttle:50,1')->group(function () {
-    Route::resource('payments', PaymentController::class)->only(['index', 'store', 'show']);
+    Route::resource('payments', PaymentController::class)->only(['index', 'store', 'show', 'destroy']);
     Route::patch('payments/{payment}/reject', [PaymentController::class, 'reject']);
     Route::patch('payments/{payment}/approve', [PaymentController::class, 'approve']);
 
