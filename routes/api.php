@@ -22,11 +22,11 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('v1')->middleware('throttle:50,1')->group(function () {
     Route::post('/login', [AuthController::class, 'login']);
     Route::post('/register', [AuthController::class, 'register']);
+    Route::get('/refresh', [AuthController::class, 'refresh']);
 
     Route::middleware('auth')->group(function () {
-        Route::post('/logout',  [AuthController::class, 'logout']);
-        Route::get('/refresh', [AuthController::class, 'refresh']);
         Route::get('/get-me', [AuthController::class, 'getMe']);
+        Route::post('/logout',  [AuthController::class, 'logout']);
 
         Route::resource('payments', PaymentController::class)->only(['index', 'store', 'show', 'destroy']);
         Route::patch('payments/{payment}/reject', [PaymentController::class, 'reject']);
