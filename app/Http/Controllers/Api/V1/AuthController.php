@@ -55,4 +55,11 @@ class AuthController extends Controller
             ->data($data)
             ->send();
     }
+
+    public function getMe()
+    {
+        return ApiResponse::message(__('user.messages.user_info'))
+            ->data(new UserResource(auth()->user()))
+            ->send();
+    }
 }

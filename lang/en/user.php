@@ -23,6 +23,7 @@ return [
         'user_successfuly_register' => 'user successfuly register',
         'user_successfuly_logout' => 'user successfuly logout',
         'user_token_successfuly_refresh' => 'user token successfuly refresh',
+        'user_info' => 'user info',
     ],
     'validations' => [],
     'errors' => []

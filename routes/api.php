@@ -33,6 +33,7 @@ Route::prefix('v1')->middleware('throttle:50,1')->group(function () {
     Route::middleware('auth')->group(function () {
         Route::post('/logout',  [AuthController::class, 'logout']);
         Route::get('/refresh', [AuthController::class, 'refresh']);
+        Route::get('/get-me', [AuthController::class, 'getMe']);
 
         Route::resource('payments', PaymentController::class)->only(['index', 'store', 'show', 'destroy']);
         Route::patch('payments/{payment}/reject', [PaymentController::class, 'reject']);

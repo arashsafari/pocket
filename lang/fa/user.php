@@ -23,6 +23,7 @@ return [
         'user_successfuly_register' => 'ثبت نام با موفقیت انجام شد',
         'user_successfuly_logout' => 'خروج با موفقیت انجام شد',
         'user_token_successfuly_refresh' => 'ویرایش توکن با موفقیت انجام شد',
+        'user_info' => 'اطلاعات کاربری',
     ],
     'validations' => [],
     'errors' => []
