@@ -15,10 +15,8 @@ class AuthController extends Controller
     public function login(LoginUserRequest $request)
     {
         $credentials = $request->only('email', 'password');
-        $token = auth()->attempt($credentials);
-
         $data = [
-            'token' => $token,
+            'token' => auth()->attempt($credentials),
         ];
 
         return ApiResponse::message(__('user.messages.user_successfuly_login'))
