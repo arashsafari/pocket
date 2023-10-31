@@ -6,10 +6,12 @@ use App\Enums\Payment\PaymentStatusEnums;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\Activitylog\Traits\LogsActivity;
+use Spatie\Activitylog\LogOptions;
 
 class Payment extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes, LogsActivity;
 
     protected $fillable = ['amount', 'status', 'currency_key'];
 
@@ -37,6 +39,11 @@ class Payment extends Model
     public function getRouteKeyName()
     {
         return 'unique_id';
+    }
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()->logUnguarded();
     }
 
     public function user()
