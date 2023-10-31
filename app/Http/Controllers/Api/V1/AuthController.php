@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\V1;
 
+use App\Contracts\Interfaces\Controllers\Api\V1\AuthControllerInterface;
 use App\Facades\ApiResponse;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginUserRequest;
@@ -10,7 +11,7 @@ use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
-class AuthController extends Controller
+class AuthController extends Controller implements AuthControllerInterface
 {
     public function login(LoginUserRequest $request)
     {
