@@ -7,7 +7,7 @@ use App\Mail\ApprovedPaymentMail;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\Mail;
 
-class ApprovedPaymentEmailListener implements ShouldQueue
+class PaymentApprovedEmailListener implements ShouldQueue
 {
     /**
      * Create the event listener.
