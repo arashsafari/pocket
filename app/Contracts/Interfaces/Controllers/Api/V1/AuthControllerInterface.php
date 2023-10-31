@@ -111,6 +111,7 @@ interface AuthControllerInterface
      *     summary="get-me",
      *     description="get-me",
      *
+     *     security={{"bearerAuth":{}}},
      *      @OA\Response(response=200,description="Successful operation"),
      *      @OA\Response(response=201,description="Successful operation"),
      *      @OA\Response(response=202,description="Successful operation"),
@@ -134,6 +135,7 @@ interface AuthControllerInterface
      *     summary="logout",
      *     description="logout",
      *
+     *     security={{"bearerAuth":{}}},
      *      @OA\Response(response=200,description="Successful operation"),
      *      @OA\Response(response=201,description="Successful operation"),
      *      @OA\Response(response=202,description="Successful operation"),

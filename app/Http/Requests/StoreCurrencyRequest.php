@@ -22,8 +22,8 @@ class StoreCurrencyRequest extends FormRequest
     public function rules(): array
     {
         $validate = [
-            'name' => ['string', 'required', 'max:20', 'min:3'],
-            'key' => ['string', 'required', 'unique:currencies,key', 'max:15', 'min:3'],
+            'name' => ['string', 'required', 'max:20', 'min:1'],
+            'key' => ['string', 'required', 'unique:currencies,key', 'max:15', 'min:1'],
             'symbol' => ['string', 'nullable', 'max:255', 'min:3'],
             'iso_code' => ['string', 'nullable', 'max:255', 'min:3'],
             'is_active' => ['boolean', 'nullable']
