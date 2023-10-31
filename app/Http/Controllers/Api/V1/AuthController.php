@@ -16,7 +16,7 @@ class AuthController extends Controller
     {
         $credentials = $request->only('email', 'password');
         $data = [
-            'token' => auth()->attempt($credentials),
+            'access_token' => auth()->attempt($credentials),
         ];
 
         return ApiResponse::message(__('user.messages.user_successfuly_login'))
@@ -40,7 +40,7 @@ class AuthController extends Controller
     public function refresh()
     {
         $data = [
-            'token' => auth()->refresh(),
+            'access_token' => auth()->refresh(),
         ];
         return ApiResponse::message(__('user.messages.user_token_successfuly_refresh'))
             ->data($data)

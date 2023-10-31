@@ -8,6 +8,7 @@ use Illuminate\Http\Response;
 use Symfony\Component\HttpFoundation\Exception\BadRequestException;
 use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 use Throwable;
+use Sentry\Laravel\Integration;
 
 class Handler extends ExceptionHandler
 {
@@ -45,7 +46,7 @@ class Handler extends ExceptionHandler
     public function register(): void
     {
         $this->reportable(function (Throwable $e) {
-            //
+            Integration::captureUnhandledException($e);
         });
     }
 }
